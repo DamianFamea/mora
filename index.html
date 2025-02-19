@@ -11,6 +11,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
         h1 {
             color: #d63384;
@@ -47,6 +48,24 @@
         .button:hover {
             background-color: #d63384;
         }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://imgur.com/MN1TKu5.png'); /* Flor PNG transparente */
+            background-size: cover;
+            animation: fall linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -59,5 +78,16 @@
         <img src="https://imgur.com/q3m2mC8.jpg" alt="Imagen 5">
     </div>
     <button class="button" onclick="window.location.href='hermosa.html'">Presiona aquí</button>
+    <script>
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.style.left = Math.random() * window.innerWidth + 'px';
+            flower.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(flower);
+            setTimeout(() => { flower.remove(); }, 5000);
+        }
+        setInterval(createFlower, 300);
+    </script>
 </body>
 </html>
